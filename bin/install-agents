@@ -1,0 +1,36 @@
+#! /usr/bin/env bash
+
+## author: torstein, torstein@skybert.net
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+install_copilot_cli() {
+  command -v copilot &> /dev/null && return
+  curl -fsSL https://gh.io/copilot-install | bash
+}
+
+install_claude_cli() {
+  command -v claude &> /dev/null && return
+  curl -fsSL https://claude.ai/install.sh | bash
+}
+
+not_install_gemini_cli() {
+  command -v gemini &> /dev/null && return
+  npm install @google/gemini-cli
+}
+
+install_conf() {
+  test -r ~/.bashrc && return
+  test -r /etc/.bashrc && cp /etc/.bashrc ~/.
+}
+
+
+main() {
+  install_conf
+  install_copilot_cli
+  install_claude_cli
+}
+
+main "$@"
