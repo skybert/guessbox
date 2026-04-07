@@ -4,7 +4,7 @@ GUESS_SRC_DIR ?= $(HOME)/src
 
 run: build
 	mkdir -p $(GUESS_DATA_DIR)
-	cp -n etc/.bashrc $(GUESS_DATA_DIR)/
+	cp -n etc/.bashrc $(GUESS_DATA_DIR)/ || true
 
 	$(GUESS_CONTAINER_CMD) \
 	  run \
